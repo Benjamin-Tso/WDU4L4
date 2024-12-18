@@ -18,7 +18,7 @@
             const dataMatrix = dataRows.map(row => row.split(","))
             const dataSatisfaction = dataMatrix.map((row,idx) => {
                 return {
-                    satisfaction : parseFloat(row[1]), 
+                    satisfaction : parseFloat(row[1])*10, 
                     hours : parseInt(row[4]),
                     index : idx
                 }
@@ -54,7 +54,7 @@
             data: {
                 labels: x_axis,
                 datasets: [{
-                    label: 'Satisfaction',
+                    label: 'Score',
                     data: y_axis,
                     borderWidth: 0
                 }]
@@ -62,7 +62,15 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks : {
+                            callback: (value) => `${value}/10 Satisfaction`
+                        }
+                    },
+                    x: {
+                        ticks : {
+                            callback: (value) => `${value+96} Hours/Month`
+                        }
                     }
                 }
             }
